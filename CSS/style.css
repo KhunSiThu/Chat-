@@ -136,31 +136,7 @@ i:hover {
   }
 }
 
-.profile-con {
-  width: 300px;
-  height: 300px;
 
-  img {
-    width: 100%;
-  }
-
-  button {
-    width: 300px;
-    opacity: 0;
-    height: 300px;
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    top: 0;
-    color: white;
-    font-size: 40px;
-  }
-
-  button:hover {
-    background-color: rgba(0, 0, 0, 0.77);
-    opacity: 1;
-  }
-}
 
 .mobile {
   display: none;
@@ -295,6 +271,7 @@ i:hover {
   padding: 0;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   width: 20vw;
 
   .phone-menu-close {
@@ -302,7 +279,7 @@ i:hover {
   }
 
   .menu {
-    height: 35vh;
+    height: 45vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -328,11 +305,15 @@ i:hover {
     }
   }
 
+  hr {
+    border-color: var(--color-light);
+  }
+
   h2 {
     font-size: 20px;
     padding: 10px 20px;
     margin: 0 10px;
-    border-bottom: 1px solid var(--color-primary);
+
   }
 
   .req-count {
@@ -345,7 +326,7 @@ i:hover {
 
   .friReq-list {
     width: 100%;
-    height: 55vh;
+    height: 50vh;
     padding: 20px;
     overflow: auto;
     scrollbar-width: none;

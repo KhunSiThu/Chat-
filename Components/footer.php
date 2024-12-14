@@ -1,6 +1,6 @@
 
 <!-- <script src="./JS/chat-room.js"></script> -->
-<script src="JS/index.js"></script>
+<!-- <script src="JS/index.js"></script> -->
 <script src="./JS/main-page.js"></script>
 <script src="./JS/chat-room.js"></script>
 

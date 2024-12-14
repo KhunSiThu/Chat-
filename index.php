@@ -1,20 +1,35 @@
-<?php require_once "./Components/header.php"; ?>
+<?php 
+
+require_once "./Components/header.php"; 
+
+session_start(); 
+
+if($_SESSION['unique_id']) {
+
+    include_once "./PHP/db_connect.php"; 
+
+    $sql = "select status from users where unique_id =" . $_SESSION['unique_id'];
+    $query = mysqli_query($conn,$sql);
+    $row = mysqli_fetch_assoc($query);
+
+    if($row['status'] === "Active now") {
+        header("Location:./main-page.php?");
+    }
+}
+
+?>
+
+
 
 <!-- Sign Up -->
 <div class="signUp flex w-screen h-screen justify-center items-center 
-
 <?= $_GET['response'] == "success" ? "hidden" : "" ?>
 <?= isset($_GET['response']) ? "" : "hidden" ?>
-
 ">
     <div class="flex flex-col min-w-full justify-center p-10 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm flex flex-col justify-center items-center">
-        <div class="chatLog-con  flex justify-center items-center">
-                <img class=""
-                    src="./images/chat.png"
-                    alt="Your Company" />
-
-                <!-- <h1>Chat!</h1> -->
+            <div class="chatLog-con flex justify-center items-center">
+                <img class="" src="./images/chat.png" alt="Your Company" />
             </div>
             <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
                 Sign up for your account
@@ -37,9 +52,8 @@
                             class="block w-full rounded-md bg-white p-3 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
                     </div>
 
-
-                    <?php if ($_GET['response'] != "success") :  ?>
-                        <p id="email-error" class=" text-red-500 mt-2 text-sm"><?= $_GET['response'] ?></p>
+                    <?php if ($_GET['response'] != "success") : ?>
+                        <p id="email-error" class="text-red-500 mt-2 text-sm"><?= $_GET['response'] ?></p>
                     <?php endif; ?>
                 </div>
 
@@ -53,15 +67,12 @@
                     </select>
                 </div>
 
-
                 <div>
                     <label for="password1" class="block text-sm font-medium text-gray-900">Create Password</label>
                     <div class="mt-2 pass-con relative">
                         <input type="password" name="password" id="password1" required
                             class="block w-full rounded-md bg-white p-3 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
                         <i class="eye-icon1 fa-regular fa-eye-slash absolute right-3 top-4 cursor-pointer"></i>
-
-
                     </div>
 
                     <!-- Password Strength Criteria for password1 -->
@@ -76,8 +87,6 @@
                         <input type="password" name="password2" id="password2" required
                             class="block w-full rounded-md bg-white p-3 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
                         <i class="eye-icon2 fa-regular fa-eye-slash absolute right-3 top-4 cursor-pointer"></i>
-
-
                     </div>
 
                     <!-- Password Match Check for password2 -->
@@ -105,19 +114,13 @@
 
 <!-- Login -->
 <div class="login flex w-screen h-screen justify-center items-center
-
+<?= $_GET['response'] == "success" || !isset($_GET['response']) ? "" : "hidden" ?>
 <?= $_GET['response'] != "success" && isset($_GET['response']) ? "hidden" : "" ?>
-<?= $_GET['response'] = "success" || !isset($_GET['response']) ? "" : "hidden" ?>
-
 ">
     <div class="flex flex-col min-w-full justify-center p-10 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm flex flex-col justify-center items-center">
-            <div class="chatLog-con  flex justify-center items-center">
-                <img class=""
-                    src="./images/chat.png"
-                    alt="Your Company" />
-
-                <!-- <h1>Chat!</h1> -->
+            <div class="chatLog-con flex justify-center items-center">
+                <img class="" src="./images/chat.png" alt="Your Company" />
             </div>
             <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
                 Sign in to your account
@@ -133,8 +136,8 @@
                             class="block w-full rounded-md bg-white p-3 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
                     </div>
 
-                    <?php if ($_GET['user']) :  ?>
-                        <p id="email-error1" class=" text-red-500 mt-2 text-sm"><?= $_GET['user'] ?></p>
+                    <?php if ($_GET['user']) : ?>
+                        <p id="email-error1" class="text-red-500 mt-2 text-sm"><?= $_GET['user'] ?></p>
                     <?php endif; ?>
 
                 </div>
@@ -147,8 +150,8 @@
                         <i class="eye-icon fa-regular fa-eye-slash absolute right-3 top-4 cursor-pointer"></i>
                     </div>
 
-                    <?php if ($_GET['pass']) :  ?>
-                        <p id="email-error2" class=" text-red-500 mt-2 text-sm"><?= $_GET['pass'] ?></p>
+                    <?php if ($_GET['pass']) : ?>
+                        <p id="email-error2" class="text-red-500 mt-2 text-sm"><?= $_GET['pass'] ?></p>
                     <?php endif; ?>
 
                 </div>
@@ -169,4 +172,14 @@
     </div>
 </div>
 
-<?php require_once "./Components/footer.php"; ?>
+<script src="./JS/index.js"></script>
+
+</body>
+
+<script src="../node_modules/flyonui/flyonui.js"></script>
+
+<script>
+   
+</script>
+</html>
+
